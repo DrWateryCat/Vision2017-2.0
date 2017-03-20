@@ -93,10 +93,10 @@ public class TargetFinder {
 	
 	private ArrayList<MatOfPoint> convexHulls(ArrayList<MatOfPoint> in) {
 		ArrayList<MatOfPoint> ret = new ArrayList<>();
-		MatOfInt hull = new MatOfInt();
 		
 		in.parallelStream().forEach((m) -> {
 			MatOfPoint temp = new MatOfPoint();
+			MatOfInt hull = new MatOfInt();
 			
 			Imgproc.convexHull(m, hull);
 			

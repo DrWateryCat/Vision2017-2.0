@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class TargetProcessor {
 	private final double FOCAL_LENGTH = 297.73;
+	@SuppressWarnings("unused")
 	private final int CAMERA_WIDTH = 320;
+	@SuppressWarnings("unused")
 	private final int CAMERA_HEIGHT = 240;
 	private final double TARGET_WIDTH = 10.25;
 	
