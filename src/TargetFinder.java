@@ -72,13 +72,21 @@ public class TargetFinder {
 	private ArrayList<MatOfPoint> filterContours(ArrayList<MatOfPoint> in) {
 		ArrayList<MatOfPoint> ret = new ArrayList<>();
 		
-		for(MatOfPoint m : in) {
+		/*for(MatOfPoint m : in) {
 			double area = Imgproc.contourArea(m);
 			
 			if(area >= this.m_minContourArea && area <= this.m_maxContourArea) {
 				ret.add(m);
 			}
-		}
+		}*/
+		
+		in.parallelStream().forEach((m) -> {
+			double area = Imgproc.contourArea(m);
+			
+			if(area >= this.m_minContourArea && area <= this.m_maxContourArea) {
+				ret.add(m);
+			}
+		});
 		
 		return ret;
 	}
@@ -87,7 +95,7 @@ public class TargetFinder {
 		ArrayList<MatOfPoint> ret = new ArrayList<>();
 		MatOfInt hull = new MatOfInt();
 		
-		for(MatOfPoint m : in) {
+		in.parallelStream().forEach((m) -> {
 			MatOfPoint temp = new MatOfPoint();
 			
 			Imgproc.convexHull(m, hull);
@@ -101,7 +109,7 @@ public class TargetFinder {
 			}
 			
 			ret.add(temp);
-		}
+		});
 		
 		return ret;
 	}
@@ -109,9 +117,9 @@ public class TargetFinder {
 	public static ArrayList<Target> convertToTarget(ArrayList<MatOfPoint> in) {
 		ArrayList<Target> ret = new ArrayList<>();
 		
-		for (MatOfPoint m : in) {
+		in.parallelStream().forEach(m -> {
 			ret.add(Target.fromMatOfPoint(m));
-		}
+		});
 		
 		return ret;
 	}
